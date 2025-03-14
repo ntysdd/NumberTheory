@@ -115,7 +115,13 @@ public class BigIntegerFactorization {
       return result;
     }
 
-    BigInteger factor1 = factor(n);
+    BigInteger factor1;
+    if (BigInteger.valueOf(-10_000).compareTo(n) <= 0 &&
+        n.compareTo(BigInteger.valueOf(10_000)) <= 0) {
+      factor1 = BigInteger.valueOf(factor(n.longValue()));
+    } else {
+      factor1 = factor(n);
+    }
     if (n.equals(factor1)) {
       result.add(n);
       return result;
