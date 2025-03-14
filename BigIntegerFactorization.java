@@ -10,6 +10,31 @@ public class BigIntegerFactorization {
     return n.signum() > 0 && n.isProbablePrime(100);
   }
 
+  public static boolean isPrime(long n) {
+    if (n <= 2) {
+      return n == 2;
+    }
+    if (n % 2 == 0) {
+      return false;
+    }
+    if (n % 3 == 0) {
+      return n == 3;
+    }
+    if (n % 5 == 0) {
+      return n == 5;
+    }
+    if (n > 10_000) {
+      return isPrime(BigInteger.valueOf(n));
+    }
+    int step = 4;
+    for (int i = 7; i * i <= (int)n; i += step, step = 6 - step) {
+      if (n % i == 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public static BigInteger factor(BigInteger n) {
     n = n.abs();
     if (n.compareTo(BigInteger.ONE) <= 0) {
@@ -76,9 +101,5 @@ public class BigIntegerFactorization {
     result.addAll(res2);
     Collections.sort(result);
     return result;
-  }
-
-  public static void main(String[] args) {
-    System.out.println(factors(new BigInteger("119214411671")));
   }
 }
