@@ -74,7 +74,7 @@ public class BigIntegerFactorization {
       return n;
     }
     for (int i = 3; i < 300; i += 2) {
-      if (!isPrime(BigInteger.valueOf(i))) {
+      if (!isPrime(i)) {
         continue;
       }
       BigInteger val = BigInteger.valueOf(i);
