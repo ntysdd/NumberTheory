@@ -35,6 +35,33 @@ public class BigIntegerFactorization {
     return true;
   }
 
+  public static long factor(long n) {
+    if (-10_000 <= n && n <= 10_000) {
+      n = Math.abs(n);
+      if (n <= 1) {
+        return 1;
+      }
+      if (n % 2 == 0) {
+        return 2;
+      }
+      if (n % 3 == 0) {
+        return 3;
+      }
+      if (n % 5 == 0) {
+        return 5;
+      }
+      int step = 4;
+      for (int i = 7; i * i <= n; i += step, step = 6 - step) {
+        if (n % i == 0) {
+          return i;
+        }
+      }
+      return n;
+    } else {
+      return factor(BigInteger.valueOf(n)).longValueExact();
+    }
+  }
+
   public static BigInteger factor(BigInteger n) {
     n = n.abs();
     if (n.compareTo(BigInteger.ONE) <= 0) {
